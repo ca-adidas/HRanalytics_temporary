@@ -1,0 +1,56 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /responses/{responseId} {
+      // Public survey: anyone can submit one anonymous response and read the
+      // aggregate source records so every browser can update its live chart.
+      allow create: if request.resource.data.keys().hasAll([
+          'school', 'year', 'major', 'answers', 'createdAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'school', 'year', 'major', 'answers', 'createdAt'
+        ])
+        && request.resource.data.school is string
+        && request.resource.data.school.size() > 0
+        && request.resource.data.school.size() <= 60
+        && request.resource.data.year in ['1학년', '2학년', '3학년', '4학년 이상']
+        && request.resource.data.major is string
+        && request.resource.data.major.size() > 0
+        && request.resource.data.major.size() <= 60
+        && request.resource.data.answers is list
+        && request.resource.data.answers.size() == 12
+        && request.resource.data.answers[0] is int
+        && request.resource.data.answers[0] >= 1 && request.resource.data.answers[0] <= 5
+        && request.resource.data.answers[1] is int
+        && request.resource.data.answers[1] >= 1 && request.resource.data.answers[1] <= 5
+        && request.resource.data.answers[2] is int
+        && request.resource.data.answers[2] >= 1 && request.resource.data.answers[2] <= 5
+        && request.resource.data.answers[3] is int
+        && request.resource.data.answers[3] >= 1 && request.resource.data.answers[3] <= 5
+        && request.resource.data.answers[4] is int
+        && request.resource.data.answers[4] >= 1 && request.resource.data.answers[4] <= 5
+        && request.resource.data.answers[5] is int
+        && request.resource.data.answers[5] >= 1 && request.resource.data.answers[5] <= 5
+        && request.resource.data.answers[6] is int
+        && request.resource.data.answers[6] >= 1 && request.resource.data.answers[6] <= 5
+        && request.resource.data.answers[7] is int
+        && request.resource.data.answers[7] >= 1 && request.resource.data.answers[7] <= 5
+        && request.resource.data.answers[8] is int
+        && request.resource.data.answers[8] >= 1 && request.resource.data.answers[8] <= 5
+        && request.resource.data.answers[9] is int
+        && request.resource.data.answers[9] >= 1 && request.resource.data.answers[9] <= 5
+        && request.resource.data.answers[10] is int
+        && request.resource.data.answers[10] >= 1 && request.resource.data.answers[10] <= 5
+        && request.resource.data.answers[11] is int
+        && request.resource.data.answers[11] >= 1 && request.resource.data.answers[11] <= 5
+        && request.resource.data.createdAt == request.time;
+      allow get, list: if true;
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

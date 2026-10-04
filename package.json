@@ -1,0 +1,11 @@
+{
+  "name": "peoplelens-hr-analytics",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed:questions": "node scripts/seed-questions.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.4.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "firestore": {"rules": "firestore.rules"},
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "firestore.rules",
+      "README.md",
+      ".firebaserc",
+      ".git/**",
+      ".gitignore",
+      "package.json",
+      "package-lock.json",
+      "node_modules/**",
+      ".firebase/**",
+      ".edge-test-profile*/**",
+      "firebase-debug*.log",
+      "**/.*",
+      "scripts/**",
+      "questions-data.js",
+      "seed-questions.html",
+      "firebase-config.example.js"
+    ],
+    "headers": [{"source": "/firebase-config.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}]
+  }
+}
